@@ -199,6 +199,89 @@ WITH (appendonly=true, compresstype=zstd, compresslevel=1, orientation=column)
 DISTRIBUTED BY(C_CUSTKEY)
 ;
 
+
+COMMENT ON TABLE gpkrtpch.NATION IS '국가 정보 테이블';
+COMMENT ON COLUMN gpkrtpch.NATION.N_NATIONKEY IS '국가 고유 식별자';
+COMMENT ON COLUMN gpkrtpch.NATION.N_NAME IS '국가 이름';
+COMMENT ON COLUMN gpkrtpch.NATION.N_REGIONKEY IS '지역 식별자 (FK)';
+COMMENT ON COLUMN gpkrtpch.NATION.N_COMMENT IS '기타 코멘트';
+
+COMMENT ON TABLE gpkrtpch.REGION IS '지역(대륙) 정보 테이블';
+COMMENT ON COLUMN gpkrtpch.REGION.R_REGIONKEY IS '지역 고유 식별자';
+COMMENT ON COLUMN gpkrtpch.REGION.R_NAME IS '지역 이름';
+COMMENT ON COLUMN gpkrtpch.REGION.R_COMMENT IS '기타 코멘트';
+
+COMMENT ON TABLE gpkrtpch.PART IS '부품 마스터 테이블';
+COMMENT ON COLUMN gpkrtpch.PART.P_PARTKEY IS '부품 고유 식별자';
+COMMENT ON COLUMN gpkrtpch.PART.P_NAME IS '부품 이름';
+COMMENT ON COLUMN gpkrtpch.PART.P_MFGR IS '제조업체';
+COMMENT ON COLUMN gpkrtpch.PART.P_BRAND IS '브랜드';
+COMMENT ON COLUMN gpkrtpch.PART.P_TYPE IS '부품 유형';
+COMMENT ON COLUMN gpkrtpch.PART.P_SIZE IS '부품 크기';
+COMMENT ON COLUMN gpkrtpch.PART.P_CONTAINER IS '포장 용기 유형';
+COMMENT ON COLUMN gpkrtpch.PART.P_RETAILPRICE IS '소매 가격';
+COMMENT ON COLUMN gpkrtpch.PART.P_COMMENT IS '기타 코멘트';
+
+COMMENT ON TABLE gpkrtpch.SUPPLIER IS '부품 공급업체 정보 테이블';
+COMMENT ON COLUMN gpkrtpch.SUPPLIER.S_SUPPKEY IS '공급업체 고유 식별자';
+COMMENT ON COLUMN gpkrtpch.SUPPLIER.S_NAME IS '공급업체 이름';
+COMMENT ON COLUMN gpkrtpch.SUPPLIER.S_ADDRESS IS '주소';
+COMMENT ON COLUMN gpkrtpch.SUPPLIER.S_NATIONKEY IS '국가 식별자 (FK)';
+COMMENT ON COLUMN gpkrtpch.SUPPLIER.S_PHONE IS '전화번호';
+COMMENT ON COLUMN gpkrtpch.SUPPLIER.S_ACCTBAL IS '계좌 잔액';
+COMMENT ON COLUMN gpkrtpch.SUPPLIER.S_COMMENT IS '기타 코멘트';
+
+COMMENT ON TABLE gpkrtpch.PARTSUPP IS '부품과 공급업체 간의 관계 및 재고 테이블 (컬럼 저장소)';
+COMMENT ON COLUMN gpkrtpch.PARTSUPP.PS_PARTKEY IS '부품 식별자 (FK)';
+COMMENT ON COLUMN gpkrtpch.PARTSUPP.PS_SUPPKEY IS '공급업체 식별자 (FK)';
+COMMENT ON COLUMN gpkrtpch.PARTSUPP.PS_AVAILQTY IS '가용 재고 수량';
+COMMENT ON COLUMN gpkrtpch.PARTSUPP.PS_SUPPLYCOST IS '공급 비용';
+COMMENT ON COLUMN gpkrtpch.PARTSUPP.PS_COMMENT IS '기타 코멘트';
+
+COMMENT ON TABLE gpkrtpch.CUSTOMER IS '고객 정보 테이블';
+COMMENT ON COLUMN gpkrtpch.CUSTOMER.C_CUSTKEY IS '고객 고유 식별자';
+COMMENT ON COLUMN gpkrtpch.CUSTOMER.C_NAME IS '고객 이름';
+COMMENT ON COLUMN gpkrtpch.CUSTOMER.C_ADDRESS IS '주소';
+COMMENT ON COLUMN gpkrtpch.CUSTOMER.C_NATIONKEY IS '국가 식별자 (FK)';
+COMMENT ON COLUMN gpkrtpch.CUSTOMER.C_PHONE IS '전화번호';
+COMMENT ON COLUMN gpkrtpch.CUSTOMER.C_ACCTBAL IS '계좌 잔액';
+COMMENT ON COLUMN gpkrtpch.CUSTOMER.C_MKTSEGMENT IS '시장 세그먼트 (업종 등)';
+COMMENT ON COLUMN gpkrtpch.CUSTOMER.C_COMMENT IS '기타 코멘트';
+
+COMMENT ON TABLE gpkrtpch.ORDERS IS '주문 헤더 정보 테이블 (파티션 테이블)';
+COMMENT ON COLUMN gpkrtpch.ORDERS.O_ORDERKEY IS '주문 고유 식별자';
+COMMENT ON COLUMN gpkrtpch.ORDERS.O_CUSTKEY IS '고객 식별자 (FK)';
+COMMENT ON COLUMN gpkrtpch.ORDERS.O_ORDERSTATUS IS '주문 상태 (F:Filled, O:Open, P:Partial)';
+COMMENT ON COLUMN gpkrtpch.ORDERS.O_TOTALPRICE IS '총 주문 금액';
+COMMENT ON COLUMN gpkrtpch.ORDERS.O_ORDERDATE IS '주문 일자';
+COMMENT ON COLUMN gpkrtpch.ORDERS.O_ORDERPRIORITY IS '주문 우선순위';
+COMMENT ON COLUMN gpkrtpch.ORDERS.O_CLERK IS '주문 처리 직원';
+COMMENT ON COLUMN gpkrtpch.ORDERS.O_SHIPPRIORITY IS '배송 우선순위';
+COMMENT ON COLUMN gpkrtpch.ORDERS.O_COMMENT IS '기타 코멘트';
+
+COMMENT ON TABLE gpkrtpch.LINEITEM IS '주문 상세 품목 정보 (파티션 테이블)';
+COMMENT ON COLUMN gpkrtpch.LINEITEM.L_ORDERKEY IS '주문 식별자 (FK)';
+COMMENT ON COLUMN gpkrtpch.LINEITEM.L_PARTKEY IS '부품 식별자 (FK)';
+COMMENT ON COLUMN gpkrtpch.LINEITEM.L_SUPPKEY IS '공급업체 식별자 (FK)';
+COMMENT ON COLUMN gpkrtpch.LINEITEM.L_LINENUMBER IS '라인 번호 (순번)';
+COMMENT ON COLUMN gpkrtpch.LINEITEM.L_QUANTITY IS '주문 수량';
+COMMENT ON COLUMN gpkrtpch.LINEITEM.L_EXTENDEDPRICE IS '연장 가격 (수량 x 단가)';
+COMMENT ON COLUMN gpkrtpch.LINEITEM.L_DISCOUNT IS '할인율';
+COMMENT ON COLUMN gpkrtpch.LINEITEM.L_TAX IS '세금';
+COMMENT ON COLUMN gpkrtpch.LINEITEM.L_RETURNFLAG IS '반품 여부 플래그 (R/A/N)';
+COMMENT ON COLUMN gpkrtpch.LINEITEM.L_LINESTATUS IS '라인 상태 코드';
+COMMENT ON COLUMN gpkrtpch.LINEITEM.L_SHIPDATE IS '선적 일자';
+COMMENT ON COLUMN gpkrtpch.LINEITEM.L_COMMITDATE IS '납기 약속 일자';
+COMMENT ON COLUMN gpkrtpch.LINEITEM.L_RECEIPTDATE IS '수령 일자';
+COMMENT ON COLUMN gpkrtpch.LINEITEM.L_SHIPINSTRUCT IS '배송 지침';
+COMMENT ON COLUMN gpkrtpch.LINEITEM.L_SHIPMODE IS '운송 모드 (항공/선박 등)';
+COMMENT ON COLUMN gpkrtpch.LINEITEM.L_COMMENT IS '기타 코멘트';
+
+COMMENT ON TABLE gpkrtpch.CUSTOMER_COM_ROW IS '고객 테이블 (Row 지향 압축 적용)';
+
+COMMENT ON TABLE gpkrtpch.CUSTOMER_COM_COL IS '고객 테이블 (Column 지향 압축 적용)';
+
+
 grant all on gpkrtpch.nation to udba,uadhoc,uoltp;
 grant all on gpkrtpch.region to udba,uadhoc,uoltp;
 grant all on gpkrtpch.part to udba,uadhoc,uoltp;
