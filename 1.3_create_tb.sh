@@ -224,6 +224,82 @@ GRANT ALL ON gpkrtpch.customer_com_col TO udba,uadhoc,uoltp;
 GRANT ALL ON gpkrtpch.lineitem TO udba,uadhoc,uoltp;
 GRANT ALL ON gpkrtpch.orders TO udba,uadhoc,uoltp;
 
+-- ============================================
+-- 코맨트
+-- ============================================
+
+COMMENT ON TABLE gpkrtpch.customer IS '고객 정보 테이블';
+COMMENT ON COLUMN gpkrtpch.customer.c_custkey IS '고객 고유 식별자';
+COMMENT ON COLUMN gpkrtpch.customer.c_name IS '고객 이름';
+COMMENT ON COLUMN gpkrtpch.customer.c_address IS '주소';
+COMMENT ON COLUMN gpkrtpch.customer.c_nationkey IS '국가 식별자 (FK)';
+COMMENT ON COLUMN gpkrtpch.customer.c_phone IS '전화번호';
+COMMENT ON COLUMN gpkrtpch.customer.c_acctbal IS '계좌 잔액';
+COMMENT ON COLUMN gpkrtpch.customer.c_mktsegment IS '시장 세그먼트 (업종 등)';
+COMMENT ON COLUMN gpkrtpch.customer.c_comment IS '기타 코멘트';
+COMMENT ON TABLE gpkrtpch.customer_com_col IS '고객 테이블 (Column 지향 압축 적용)';
+COMMENT ON TABLE gpkrtpch.customer_com_row IS '고객 테이블 (Row 지향 압축 적용)';
+COMMENT ON TABLE gpkrtpch.lineitem IS '주문 상세 품목 정보 (파티션 테이블)';
+COMMENT ON COLUMN gpkrtpch.lineitem.l_orderkey IS '주문 식별자 (FK)';
+COMMENT ON COLUMN gpkrtpch.lineitem.l_partkey IS '부품 식별자 (FK)';
+COMMENT ON COLUMN gpkrtpch.lineitem.l_suppkey IS '공급업체 식별자 (FK)';
+COMMENT ON COLUMN gpkrtpch.lineitem.l_linenumber IS '라인 번호 (순번)';
+COMMENT ON COLUMN gpkrtpch.lineitem.l_quantity IS '주문 수량';
+COMMENT ON COLUMN gpkrtpch.lineitem.l_extendedprice IS '연장 가격 (수량 x 단가)';
+COMMENT ON COLUMN gpkrtpch.lineitem.l_discount IS '할인율';
+COMMENT ON COLUMN gpkrtpch.lineitem.l_tax IS '세금';
+COMMENT ON COLUMN gpkrtpch.lineitem.l_returnflag IS '반품 여부 플래그 (R/A/N)';
+COMMENT ON COLUMN gpkrtpch.lineitem.l_linestatus IS '라인 상태 코드';
+COMMENT ON COLUMN gpkrtpch.lineitem.l_shipdate IS '선적 일자';
+COMMENT ON COLUMN gpkrtpch.lineitem.l_commitdate IS '납기 약속 일자';
+COMMENT ON COLUMN gpkrtpch.lineitem.l_receiptdate IS '수령 일자';
+COMMENT ON COLUMN gpkrtpch.lineitem.l_shipinstruct IS '배송 지침';
+COMMENT ON COLUMN gpkrtpch.lineitem.l_shipmode IS '운송 모드 (항공/선박 등)';
+COMMENT ON COLUMN gpkrtpch.lineitem.l_comment IS '기타 코멘트';
+COMMENT ON TABLE gpkrtpch.nation IS '국가 정보 테이블';
+COMMENT ON COLUMN gpkrtpch.nation.n_nationkey IS '국가 고유 식별자';
+COMMENT ON COLUMN gpkrtpch.nation.n_name IS '국가 이름';
+COMMENT ON COLUMN gpkrtpch.nation.n_regionkey IS '지역 식별자 (FK)';
+COMMENT ON COLUMN gpkrtpch.nation.n_comment IS '기타 코멘트';
+COMMENT ON TABLE gpkrtpch.orders IS '주문 헤더 정보 테이블 (파티션 테이블)';
+COMMENT ON COLUMN gpkrtpch.orders.o_orderkey IS '주문 고유 식별자';
+COMMENT ON COLUMN gpkrtpch.orders.o_custkey IS '고객 식별자 (FK)';
+COMMENT ON COLUMN gpkrtpch.orders.o_orderstatus IS '주문 상태 (F:Filled, O:Open, P:Partial)';
+COMMENT ON COLUMN gpkrtpch.orders.o_totalprice IS '총 주문 금액';
+COMMENT ON COLUMN gpkrtpch.orders.o_orderdate IS '주문 일자';
+COMMENT ON COLUMN gpkrtpch.orders.o_orderpriority IS '주문 우선순위';
+COMMENT ON COLUMN gpkrtpch.orders.o_clerk IS '주문 처리 직원';
+COMMENT ON COLUMN gpkrtpch.orders.o_shippriority IS '배송 우선순위';
+COMMENT ON COLUMN gpkrtpch.orders.o_comment IS '기타 코멘트';
+COMMENT ON TABLE gpkrtpch.part IS '부품 마스터 테이블';
+COMMENT ON COLUMN gpkrtpch.part.p_partkey IS '부품 고유 식별자';
+COMMENT ON COLUMN gpkrtpch.part.p_name IS '부품 이름';
+COMMENT ON COLUMN gpkrtpch.part.p_mfgr IS '제조업체';
+COMMENT ON COLUMN gpkrtpch.part.p_brand IS '브랜드';
+COMMENT ON COLUMN gpkrtpch.part.p_type IS '부품 유형';
+COMMENT ON COLUMN gpkrtpch.part.p_size IS '부품 크기';
+COMMENT ON COLUMN gpkrtpch.part.p_container IS '포장 용기 유형';
+COMMENT ON COLUMN gpkrtpch.part.p_retailprice IS '소매 가격';
+COMMENT ON COLUMN gpkrtpch.part.p_comment IS '기타 코멘트';
+COMMENT ON TABLE gpkrtpch.partsupp IS '부품과 공급업체 간의 관계 및 재고 테이블 (컬럼 저장소)';
+COMMENT ON COLUMN gpkrtpch.partsupp.ps_partkey IS '부품 식별자 (FK)';
+COMMENT ON COLUMN gpkrtpch.partsupp.ps_suppkey IS '공급업체 식별자 (FK)';
+COMMENT ON COLUMN gpkrtpch.partsupp.ps_availqty IS '가용 재고 수량';
+COMMENT ON COLUMN gpkrtpch.partsupp.ps_supplycost IS '공급 비용';
+COMMENT ON COLUMN gpkrtpch.partsupp.ps_comment IS '기타 코멘트';
+COMMENT ON TABLE gpkrtpch.region IS '지역(대륙) 정보 테이블';
+COMMENT ON COLUMN gpkrtpch.region.r_regionkey IS '지역 고유 식별자';
+COMMENT ON COLUMN gpkrtpch.region.r_name IS '지역 이름';
+COMMENT ON COLUMN gpkrtpch.region.r_comment IS '기타 코멘트';
+COMMENT ON TABLE gpkrtpch.supplier IS '부품 공급업체 정보 테이블';
+COMMENT ON COLUMN gpkrtpch.supplier.s_suppkey IS '공급업체 고유 식별자';
+COMMENT ON COLUMN gpkrtpch.supplier.s_name IS '공급업체 이름';
+COMMENT ON COLUMN gpkrtpch.supplier.s_address IS '주소';
+COMMENT ON COLUMN gpkrtpch.supplier.s_nationkey IS '국가 식별자 (FK)';
+COMMENT ON COLUMN gpkrtpch.supplier.s_phone IS '전화번호';
+COMMENT ON COLUMN gpkrtpch.supplier.s_acctbal IS '계좌 잔액';
+COMMENT ON COLUMN gpkrtpch.supplier.s_comment IS '기타 코멘트';
+
 !
 ###### query end
 END_TM1=`date "+%Y-%m-%d %H:%M:%S"`
